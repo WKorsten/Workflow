@@ -1,0 +1,20 @@
+version: "2"
+services:
+  filter:
+    build: ./filter
+    links:
+      - db
+    ports:
+      - "5000:5000"
+    volumes:
+      - /c/Users/wimme/Documents/dockerize/variant_list/:/data/:rw
+
+  db:
+    image: mysql:5.7
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+    volumes:
+      - ./db:/docker-entrypoint-initdb.d/:ro
+
